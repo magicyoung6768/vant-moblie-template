@@ -15,7 +15,7 @@ export const useDataDictStore = defineStore('dataDict', {
           page: 1,
           ...obj
         })
-        if (res.code == '200') {
+        if (res.code === '200') {
           this.commonList = res.data.DnsServer
         }
       } catch (error: any) {

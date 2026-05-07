@@ -60,13 +60,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     },
     build: {
       sourcemap: false,
-      terserOptions: {
-        compress: {
-          keep_infinity: true,
-          drop_console: true,
-          drop_debugger: true
-        }
-      },
+      minify: 'rolldown',
       rollupOptions: {
         output: {
           manualChunks(id) {

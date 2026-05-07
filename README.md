@@ -4,13 +4,13 @@
 
 ## 技术栈
 
-- **框架**: Vue 3 
-- **UI 库**: Vant 4 
-- **构建工具**: Vite 7.0.0
+- **框架**: Vue 3
+- **UI 库**: Vant 4
+- **构建工具**: Vite 8.0.0
 - **路由**: Vue Router 4.6.0
 - **状态管理**: Pinia 3.0.0 + pinia-plugin-persistedstate
 - **类型检查**: TypeScript 5.4.0
-- **CSS 预处理器**: Sass  
+- **CSS 预处理器**: Sass
 - **代码规范**: ESLint + Prettier
 - **响应式设计**: lib-flexible + postcss-pxtorem
 - **网络请求**: Axios
@@ -58,3 +58,4 @@ pnpm format
 ```sh
 pnpm serve
 ```
+
