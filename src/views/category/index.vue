@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
 import CategoryGoods from './components/category-goods.vue'
 import CategorySidebar from './components/category-sidebar.vue'
@@ -74,8 +74,6 @@ const goodsList = ref<GoodsItem[]>([
     thumb: 'https://picsum.photos/300/300?random=25'
   }
 ])
-
-onMounted(async () => {})
 </script>
 
 <style lang="scss" scoped>

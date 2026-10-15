@@ -2,13 +2,19 @@ import { defineStore } from 'pinia'
 
 import { getDataDict } from '@/api/common'
 
+interface DictItem {
+  [key: string]: unknown
+}
+
 export const useDataDictStore = defineStore('dataDict', {
-  state: () => ({
+  state: (): { commonList: DictItem[] } => ({
     commonList: []
   }),
   actions: {
     async getCommonList(obj: object) {
-      if (!obj && this.commonList.length) return
+      if (!obj && this.commonList.length) {
+        return
+      }
       try {
         const res = await getDataDict({
           page_size: 1000,
@@ -18,8 +24,8 @@ export const useDataDictStore = defineStore('dataDict', {
         if (res.code === '200') {
           this.commonList = res.data.DnsServer
         }
-      } catch (error: any) {
-        console.log('error getCommonList', error.message)
+      } catch (error) {
+        console.log('error getCommonList', (error as Error).message)
       }
     }
   },

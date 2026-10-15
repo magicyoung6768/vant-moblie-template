@@ -33,7 +33,7 @@ watch(
 )
 
 const handleChange = (index: number) => {
-  const id = props.categories[index].id
+  const { id } = props.categories[index]
   emit('change', id)
 }
 </script>

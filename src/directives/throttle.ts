@@ -1,7 +1,7 @@
 export default {
   mounted(el, { value, arg }) {
     const eventType = arg || 'click'
-    let timer: any = null
+    let timer: ReturnType<typeof setTimeout> | null = null
     el._handler = () => {
       if (!timer) {
         timer = setTimeout(() => {

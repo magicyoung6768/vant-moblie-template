@@ -5,7 +5,7 @@ import 'lib-flexible'
 
 import mitt from 'mitt'
 import VConsole from 'vconsole'
-import { Component, createApp } from 'vue'
+import { createApp, type Component } from 'vue'
 
 import App from './App.vue'
 import directives from './directives'
@@ -22,10 +22,11 @@ Object.values(components as Component).forEach(component => {
   app.component(component.name, component)
 })
 
-app.config.globalProperties.$mitt = new (mitt as any)()
+app.config.globalProperties.$mitt = mitt()
 
 if (import.meta.env.MODE !== 'production') {
-  new VConsole()
+  const vConsole = new VConsole()
+  void vConsole
 }
 
 app.use(router).use(store).use(directives).mount('#app')

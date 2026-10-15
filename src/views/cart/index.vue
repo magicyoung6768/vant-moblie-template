@@ -68,7 +68,7 @@ const cartList = ref<CartGoodsItem[]>([
 
 const checkedIds = ref<number[]>([])
 
-onMounted(async () => {
+onMounted(() => {
   checkedIds.value = cartList.value.filter(item => item.checked).map(item => item.id)
 })
 
@@ -108,7 +108,6 @@ const handleCheckAll = (checked: boolean) => {
 const handleSubmit = () => {
   if (checkedIds.value.length === 0) {
     showToast('请选择商品')
-    return
   }
 }
 </script>

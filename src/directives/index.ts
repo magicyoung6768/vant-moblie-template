@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import { type App, type Directive } from 'vue'
 
 const modules = import.meta.glob('./*', { eager: true })
 
@@ -6,10 +6,10 @@ export default {
   install(app: App<Element>) {
     Object.keys(modules).forEach(key => {
       const name = key.replace(/(.*\/)*([^.]+).*/gi, '$2')
-      const module: any = modules[key]
-      console.log(module, name)
-      if (module.default) {
-        app.directive(name, module.default)
+      const { default: directive } = modules[key] as { default?: Directive }
+      console.log(directive, name)
+      if (directive) {
+        app.directive(name, directive)
       }
     })
   }

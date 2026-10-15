@@ -1,22 +1,25 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "jsx": "preserve",
     "target": "esnext",
     "module": "esnext",
-    "sourceMap": false,
-    "noImplicitAny": false,
-    "skipLibCheck": true,
-    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "jsx": "preserve",
     "jsxImportSource": "vue",
+    "strict": true,
+    "noImplicitAny": false,
+    "noEmit": true,
+    "sourceMap": false,
+    "isolatedModules": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
+    "skipLibCheck": true,
     "resolveJsonModule": true,
-    "moduleResolution": "node",
+    "allowImportingTsExtensions": true,
+    "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
     "types": ["node", "vite/client"]
   },

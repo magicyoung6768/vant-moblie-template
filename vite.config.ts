@@ -6,7 +6,7 @@ import pxtorem from 'postcss-pxtorem'
 import tailwindcss from 'tailwindcss'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import { ConfigEnv, defineConfig, loadEnv, UserConfig } from 'vite'
+import { defineConfig, loadEnv, type ConfigEnv, type UserConfig } from 'vite'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
@@ -36,7 +36,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
           pxtorem({
             // rootValue: 37.5, 如果设计稿的尺寸不是 375，而是 750
             rootValue({ file }: { file: string }) {
-              return file.indexOf('vant') !== -1 ? 37.5 : 75
+              return file.includes('vant') ? 37.5 : 75
             },
             propList: ['*']
           }),

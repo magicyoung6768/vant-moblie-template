@@ -181,7 +181,7 @@
     "sort-imports": "off",
     "sort-keys": "off",
 
-    "typescript/consistent-type-imports": "warn",
+    "typescript/consistent-type-imports": ["warn", { "fixStyle": "inline-type-imports" }],
     "typescript/consistent-type-definitions": ["warn", "interface"],
     "typescript/array-type": ["warn", { "default": "array-simple" }],
     "typescript/no-explicit-any": "warn",
@@ -196,7 +196,7 @@
     "import/no-empty-named-blocks": "warn",
     "import/no-unassigned-import": "off",
     "import/no-named-as-default-member": "off",
-    "import/consistent-type-specifier-style": ["warn", "prefer-top-level"],
+    "import/consistent-type-specifier-style": ["warn", "prefer-inline"],
 
     "promise/no-return-wrap": "warn",
 
