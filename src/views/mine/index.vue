@@ -2,7 +2,7 @@
   <div class="mine-page">
     <div class="user-info">
       <van-image round width="60" height="60" :src="userInfo.avatar" />
-      <div class="user-detail" >
+      <div class="user-detail">
         <div class="user-name">{{ userInfo.name }}</div>
         <div class="user-description">{{ userInfo.description }}</div>
       </div>

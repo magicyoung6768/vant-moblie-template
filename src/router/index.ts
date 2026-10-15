@@ -21,10 +21,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'mine',
     component: () => import('@/views/mine/index.vue')
   },
-  { path: '/order',
-    name: 'order',
-    component: () => import('@/views/order/index.vue')
-  }
+  { path: '/order', name: 'order', component: () => import('@/views/order/index.vue') }
 ]
 
 const router = createRouter({
