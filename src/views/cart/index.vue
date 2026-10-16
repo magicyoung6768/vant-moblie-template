@@ -1,5 +1,14 @@
 <template>
   <div class="cart-page">
+    <UseOnline>
+      <template #default="{ isOnline }">
+        <van-notice-bar
+          v-if="!isOnline"
+          left-icon="warning-o"
+          text="网络已断开，请检查网络后再提交订单"
+        />
+      </template>
+    </UseOnline>
     <div class="cart-list">
       <van-checkbox-group v-model="checkedIds">
         <cart-item
@@ -21,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import { UseOnline } from '@vueuse/components'
 import { showConfirmDialog, showToast } from 'vant'
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'

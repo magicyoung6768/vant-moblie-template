@@ -1,83 +1,111 @@
 <template>
-  <div class="mine-page">
-    <div class="mine-list">
+  <div class="order-page">
+    <div class="order-summary">
+      <span class="order-count">共 {{ orders.length }} 笔订单</span>
+      <UseTimeAgo :time="lastUpdated">
+        <template #default="{ timeAgo }">
+          <span class="order-updated">数据更新于 {{ timeAgo }}</span>
+        </template>
+      </UseTimeAgo>
+    </div>
+    <div class="order-list">
       <van-cell
-        v-for="item in mineItems"
-        :key="item.text"
-        :icon="item.icon"
-        :title="item.text"
+        v-for="item in orders"
+        :key="item.id"
+        :title="item.title"
+        :value="`¥${item.amount}`"
         is-link
-      />
+      >
+        <template #label>
+          <div class="order-meta">
+            <span class="order-no">{{ item.id }}</span>
+            <UseTimeAgo :time="item.time">
+              <template #default="{ timeAgo }">
+                <span class="order-time">{{ timeAgo }}</span>
+              </template>
+            </UseTimeAgo>
+            <van-tag plain type="primary">{{ item.status }}</van-tag>
+          </div>
+        </template>
+      </van-cell>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { showToast } from 'vant'
-import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { UseTimeAgo } from '@vueuse/components'
+import { ref } from 'vue'
 
-interface UserInfoProps {
-  avatar: string
-  name: string
-  description: string
+interface OrderItem {
+  id: string
+  title: string
+  status: string
+  amount: number
+  time: number
 }
 
-interface MineItem {
-  icon: string
-  text: string
-  path: string
-}
+const now = Date.now()
 
-const router = useRouter()
-
-// 用户信息
-const userInfo = ref<UserInfoProps>({
-  avatar: 'https://picsum.photos/100/100?random=40',
-  name: '用户名',
-  description: '个人简介'
-})
-
-const mineItems = ref<MineItem[]>([
-  { icon: 'orders-o', text: '我的订单', path: '/orders' },
-  { icon: 'star-o', text: '我的收藏', path: '/favorites' },
-  { icon: 'setting-o', text: '设置', path: '/settings' },
-  { icon: 'info-o', text: '关于我们', path: '/about' }
+const orders = ref<OrderItem[]>([
+  {
+    id: '20261016001',
+    title: '冰离子纯色翻领T恤 等2件',
+    status: '待付款',
+    amount: 159.8,
+    time: now - 1000 * 60 * 5
+  },
+  {
+    id: '20261015007',
+    title: '富士棉拼色口袋款',
+    status: '待发货',
+    amount: 99.9,
+    time: now - 1000 * 60 * 60 * 6
+  },
+  {
+    id: '20261014012',
+    title: '潮流印花短袖 等3件',
+    status: '已完成',
+    amount: 239.7,
+    time: now - 1000 * 60 * 60 * 24 * 2
+  }
 ])
+
+const lastUpdated = ref(now - 1000 * 60 * 30)
 </script>
 
 <style lang="scss" scoped>
-.mine-page {
-  min-height: calc(100vh - 1.22667rem);
+.order-page {
+  min-height: calc(100vh - 100px);
   background: #f7f8fa;
-  .user-info {
+
+  .order-summary {
     display: flex;
     align-items: center;
-    padding: 20px;
+    justify-content: space-between;
+    padding: 10px 15px;
+    font-size: 12px;
+    color: #999;
     background: white;
-    margin-bottom: 10px;
+  }
 
-    .user-detail {
-      flex: 1;
-      margin-left: 15px;
+  .order-list {
+    background: white;
+  }
 
-      .user-name {
-        font-size: 16px;
-        color: #333;
-      }
+  .order-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #999;
 
-      .user-description {
-        font-size: 12px;
-        color: #999;
-      }
+    .order-no {
+      color: #666;
     }
 
-    .van-icon {
+    .order-time {
       color: #999;
     }
-  }
-  .mine-list {
-    background: white;
   }
 }
 </style>

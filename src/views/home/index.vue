@@ -16,23 +16,25 @@
     </van-grid>
     <div class="recommend-section">
       <h3 class="section-title">热门推荐</h3>
-      <van-card
-        v-for="item in recommends"
-        :key="item.id"
-        :price="item.price"
-        :desc="item.desc"
-        :title="item.title"
-        :thumb="item.thumb"
-      >
-        <template #tags>
-          <van-tag plain type="danger">{{ item.tag }}</van-tag>
+      <UseElementVisibility v-for="item in recommends" :key="item.id">
+        <template #default="{ isVisible }">
+          <van-card :price="item.price" :desc="item.desc" :title="item.title" :thumb="item.thumb">
+            <template #thumb>
+              <img v-if="isVisible" class="thumb-img" :src="item.thumb" :alt="item.title" />
+              <div v-else class="thumb-placeholder" />
+            </template>
+            <template #tags>
+              <van-tag plain type="danger">{{ item.tag }}</van-tag>
+            </template>
+          </van-card>
         </template>
-      </van-card>
+      </UseElementVisibility>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { UseElementVisibility } from '@vueuse/components'
 import { ref } from 'vue'
 
 interface SwipeImage {
@@ -177,6 +179,20 @@ const recommends = ref<RecommendItem[]>([
   :deep(.van-card) {
     margin-top: 8px;
     border-radius: 8px;
+  }
+
+  .thumb-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #f2f3f5;
+    border-radius: var(--van-card-thumb-radius);
   }
 }
 </style>
